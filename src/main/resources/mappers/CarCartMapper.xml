@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.car.mapper.CarCartMapper">
+  <resultMap id="BaseResultMap" type="com.qf.car.domain.entity.CarCart">
+    <!--@mbg.generated-->
+    <id column="car_cart_id" jdbcType="INTEGER" property="carCartId" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
+    <result column="car_id" jdbcType="INTEGER" property="carId" />
+    <result column="car_cart_create_date" jdbcType="TIMESTAMP" property="carCartCreateDate" />
+    <result column="car_cart_return_date" jdbcType="TIMESTAMP" property="carCartReturnDate" />
+  </resultMap>
+    <insert id="addCart">
+        insert into car_cart (uid, car_id,car_cart_create_date,car_cart_return_date)
+        values (#{uid},#{carId},#{createDate},#{returnDate})
+    </insert>
+    <update id="delCart">
+        update car_cart
+        set status = 1
+        where car_cart_id=#{cartId}
+    </update>
+    <!--<update id="updateNumById">-->
+        <!--update car_cart-->
+        <!--set-->
+            <!--<if test="op != null and op == 1">-->
+                <!--number = number +1-->
+            <!--</if>-->
+
+            <!--<if test="op != null and op == 2">-->
+                <!--number = nummber -1-->
+            <!--</if>-->
+        <!--where cart_id = #{cartId}-->
+    <!--</update>-->
+    <select id="findById" resultMap="BaseResultMap">
+      select  ca.car_cart_id,c.car_image,c.car_name,c.car_title,c.car_price,c.car_plate
+      from car_cart ca
+        left join car c on ca.car_id = c.car_id
+        where uid=#{uid}
+  </select>
+
+    <!--<select id="findCartByUidCartId" resultMap="BaseResultMap">-->
+        <!--select *-->
+        <!--from car_cart-->
+        <!--where uid = #{uid} and car_cart_id=#{cartId};-->
+    <!--</select>-->
+</mapper>

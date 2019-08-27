@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.car.mapper.CarMenuMapper">
+  <!--一级-->
+  <resultMap id="BaseResultMap" type="com.qf.car.domain.entity.CarMenu">
+    <!--@mbg.generated-->
+    <id column="car_menu_id" jdbcType="INTEGER" property="carMenuId" />
+    <result column="car_menu_name" jdbcType="VARCHAR" property="carMenuName" />
+    <result column="cate_id" jdbcType="INTEGER" property="cateId" />
+  </resultMap>
+  <!--二级-->
+  <resultMap id="Base_CarMenu_vo"
+             type="com.qf.car.domain.vo.CarMenuVo"
+             extends="BaseResultMap">
+    <collection property="carMenu1List" ofType="com.qf.car.domain.entity.CarMenu1">
+      <id property="carMenu1Id" column="car_menu1_id"/>
+      <result property="carMenu1Name" column="car_menu1_name"/>
+    </collection>
+  </resultMap>
+</mapper>

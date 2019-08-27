@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.car.mapper.CategoryMapper">
+  <resultMap id="BaseResultMap" type="com.qf.car.domain.entity.Category">
+    <!--@mbg.generated-->
+    <id column="cate_id" jdbcType="INTEGER" property="cateId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+  </resultMap>
+  <resultMap id="cate_resultMap" type="com.qf.car.domain.vo.CategoryVo">
+    <id property="cateId" column="cate_id"/>
+    <result property="name" column="name"/>
+    <collection property="carMenuList" resultMap="com.qf.car.mapper.CarMenuMapper.Base_CarMenu_vo"/>
+  </resultMap>
+  <select id="findAll" resultMap="BaseResultMap">
+    select *
+    from category c
+        left join car_menu m on c.cate_id = m.cate_id
+        left join car_menu m2 on c.cate_id = m2.cate_id
+  </select>
+
+</mapper>
